@@ -1,0 +1,130 @@
+{
+  "EDITOR_STATE": {
+    "allProjectFiles": {
+      "83f757eb-e87a-4e42-9deb-493e1dcb6227": {
+        "id": "83f757eb-e87a-4e42-9deb-493e1dcb6227",
+        "parent": null,
+        "name": "gh2",
+        "type": "DIRECTORY",
+        "isDirectory": true,
+        "children": [
+          "8dadfc42-535a-47e5-a7b1-f64698c04fb3",
+          "4587879e-b282-4e88-9c7f-07416017d6da"
+        ],
+        "isRemovable": false,
+        "filePath": "gh2"
+      },
+      "8dadfc42-535a-47e5-a7b1-f64698c04fb3": {
+        "id": "8dadfc42-535a-47e5-a7b1-f64698c04fb3",
+        "parent": "83f757eb-e87a-4e42-9deb-493e1dcb6227",
+        "name": "function.js",
+        "type": "JS_LAMBDA",
+        "isDirectory": false,
+        "children": [],
+        "isRemovable": true,
+        "filePath": "gh2/function.js",
+        "code": "let google = require('googleapis').google;\nlet _auth = require('./Authorizer');\nconst storage = google.storage('v1');\n\nexports.handler = function (request, response) {\n    storage.objects.list({\n        bucket: 'hirutest01',\n        maxResults: 10,\n        prefix: ''\n    })\n        .then(response => {\n            console.log(response.data);           // successful response\n            /*\n    \n            WARNING: response.data.items will be missing altogether (instead of being empty) if there are no matches!  \n    \n            response.data = {\n                \"kind\": \"storage#objects\",\n                \"items\": [\n                    {\n                        \"kind\": \"storage#object\",\n                        \"id\": \"<bucket>/<object>/<timestamp>\",\n                        \"selfLink\": \"https://www.googleapis.com/storage/v1/b/<bucket>/o/<object>\",\n                        \"name\": \"<object>\",\n                        \"bucket\": \"<bucket>\",\n                        \"contentType\": \"<content-type>\",\n                        \"timeCreated\": \"<yyyy-MM-ddTHH:mm:ss.###Z>\",\n                        \"updated\": \"<yyyy-MM-ddTHH:mm:ss.###Z>\",\n                        \"size\": \"<bytes>\",\n                        \"md5Hash\": \"<hash>\",\n                        \"metadata\": {\n                            \"<key1>\": \"<val1>\",\n                            \"<key2>\": \"<val2>\"\n                        },\n                        \"crc32c\": \"<crc>\",\n                        \"etag\": \"<etag>\"\n                        // , ...\n                    }\n                    // , ...\n                ]\n            }\n            */\n        })\n        .catch(err => {\n            console.log(err, err.stack); // an error occurred\n        });\n\n    response.send({ \"message\": \"Successfully executed\" });\n}",
+        "config": {
+          "runtime": "nodejs8",
+          "timeout": 60,
+          "memory": 128,
+          "triggerType": 0,
+          "handler": "handler"
+        },
+        "triggers": [
+          {
+            "resourceName": "http-trigger",
+            "config": {}
+          }
+        ]
+      },
+      "3289c5d3-4ddc-442c-8ec1-5ff7f3ea3a38": {
+        "id": "3289c5d3-4ddc-442c-8ec1-5ff7f3ea3a38",
+        "parent": null,
+        "name": "index.js",
+        "type": "JS_FILE",
+        "isDirectory": false,
+        "children": [],
+        "isRemovable": false,
+        "filePath": "index.js",
+        "code": "// This file is used to register all your cloud functions in GCP.\n// DO NOT EDIT/DELETE THIS, UNLESS YOU KNOW WHAT YOU ARE DOING.\n\nexports.gh2function = require(\"./gh2/function.js\").handler;"
+      },
+      "d032ec24-8b94-41f4-bb84-f890de0521e6": {
+        "id": "d032ec24-8b94-41f4-bb84-f890de0521e6",
+        "parent": null,
+        "name": "main.py",
+        "type": "PYTHON_FILE",
+        "isDirectory": false,
+        "children": [],
+        "isRemovable": false,
+        "filePath": "main.py",
+        "code": "# This file is used to register all your cloud functions in GCP.\n# DO NOT EDIT/DELETE THIS, UNLESS YOU KNOW WHAT YOU ARE DOING.\n\n"
+      },
+      "4587879e-b282-4e88-9c7f-07416017d6da": {
+        "id": "4587879e-b282-4e88-9c7f-07416017d6da",
+        "parent": "83f757eb-e87a-4e42-9deb-493e1dcb6227",
+        "name": "Authorizer.js",
+        "type": "JS_FILE",
+        "isDirectory": false,
+        "children": [],
+        "isRemovable": true,
+        "filePath": "gh2/Authorizer.js",
+        "code": "const google = require(\"googleapis\").google;\n\ngoogle.options({auth: new google.auth.Compute()});"
+      }
+    },
+    "rootNode": "83f757eb-e87a-4e42-9deb-493e1dcb6227",
+    "openFiles": [
+      "8dadfc42-535a-47e5-a7b1-f64698c04fb3"
+    ],
+    "currentFileId": "8dadfc42-535a-47e5-a7b1-f64698c04fb3",
+    "resources": {
+      "http-trigger": {
+        "name": "http-trigger",
+        "type": "http-trigger",
+        "config": {}
+      },
+      "storagehirutest01": {
+        "name": "storagehirutest01",
+        "type": "CloudStorage",
+        "config": {
+          "mode": 1,
+          "bucket": {
+            "name": "hirutest01"
+          }
+        }
+      }
+    },
+    "customTemplate": {
+      "dialect": null,
+      "definitions": null
+    },
+    "envVariables": [],
+    "packageJSON": {
+      "dependencies": {
+        "googleapis": {
+          "name": "googleapis",
+          "language": "javascript",
+          "version": "29.0.0",
+          "dev": false,
+          "notRemovable": false
+        }
+      }
+    }
+  },
+  "PROJECT_META": {
+    "projectName": "gh2",
+    "projectDescription": "",
+    "projectVersion": "1.0.0",
+    "projectRegion": "us-east1",
+    "platform": "GCP",
+    "platformRegions": {},
+    "lastSave": 1574758387890
+  },
+  "VCS_STATE": {
+    "provider": "GitHub",
+    "repo": {
+      "name": "gh2",
+      "url": "https://github.com/Kumudikatest/gh2"
+    }
+  }
+}
