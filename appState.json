@@ -9,7 +9,9 @@
         "isDirectory": true,
         "children": [
           "8dadfc42-535a-47e5-a7b1-f64698c04fb3",
-          "4587879e-b282-4e88-9c7f-07416017d6da"
+          "4587879e-b282-4e88-9c7f-07416017d6da",
+          "675ec3a8-1504-454d-8c70-dd0ade31d0c1",
+          "6fda6ed0-421c-4c06-8cea-108fda0368fd"
         ],
         "isRemovable": false,
         "filePath": "gh2"
@@ -58,7 +60,7 @@
         "children": [],
         "isRemovable": false,
         "filePath": "main.py",
-        "code": "# This file is used to register all your cloud functions in GCP.\n# DO NOT EDIT/DELETE THIS, UNLESS YOU KNOW WHAT YOU ARE DOING.\n\n"
+        "code": "# This file is used to register all your cloud functions in GCP.\n# DO NOT EDIT/DELETE THIS, UNLESS YOU KNOW WHAT YOU ARE DOING.\n\nfrom gh2.newq import handler as gh2newq"
       },
       "4587879e-b282-4e88-9c7f-07416017d6da": {
         "id": "4587879e-b282-4e88-9c7f-07416017d6da",
@@ -70,13 +72,48 @@
         "isRemovable": true,
         "filePath": "gh2/Authorizer.js",
         "code": "const google = require(\"googleapis\").google;\n\ngoogle.options({auth: new google.auth.Compute()});"
+      },
+      "675ec3a8-1504-454d-8c70-dd0ade31d0c1": {
+        "id": "675ec3a8-1504-454d-8c70-dd0ade31d0c1",
+        "parent": "83f757eb-e87a-4e42-9deb-493e1dcb6227",
+        "name": "newq.py",
+        "type": "PYTHON_LAMBDA",
+        "isDirectory": false,
+        "children": [],
+        "isRemovable": true,
+        "filePath": "gh2/newq.py",
+        "code": "def handler(request):\n    \n    return \"Successfully executed\"\n",
+        "config": {
+          "runtime": "python37",
+          "timeout": 60,
+          "memory": 128,
+          "triggerType": 0
+        },
+        "triggers": [
+          {
+            "resourceName": "http-trigger",
+            "config": {}
+          }
+        ]
+      },
+      "6fda6ed0-421c-4c06-8cea-108fda0368fd": {
+        "id": "6fda6ed0-421c-4c06-8cea-108fda0368fd",
+        "parent": "83f757eb-e87a-4e42-9deb-493e1dcb6227",
+        "name": "__init__.py",
+        "type": "PYTHON_FILE",
+        "isDirectory": false,
+        "children": [],
+        "isRemovable": true,
+        "filePath": "gh2/__init__.py",
+        "code": ""
       }
     },
     "rootNode": "83f757eb-e87a-4e42-9deb-493e1dcb6227",
     "openFiles": [
-      "8dadfc42-535a-47e5-a7b1-f64698c04fb3"
+      "8dadfc42-535a-47e5-a7b1-f64698c04fb3",
+      "675ec3a8-1504-454d-8c70-dd0ade31d0c1"
     ],
-    "currentFileId": "8dadfc42-535a-47e5-a7b1-f64698c04fb3",
+    "currentFileId": "675ec3a8-1504-454d-8c70-dd0ade31d0c1",
     "resources": {
       "http-trigger": {
         "name": "http-trigger",
@@ -98,7 +135,16 @@
       "dialect": null,
       "definitions": null
     },
-    "envVariables": [],
+    "envVariables": [
+      {
+        "lambdaId": "675ec3a8-1504-454d-8c70-dd0ade31d0c1",
+        "varKey": "PYTHONPATH",
+        "varValue": "/var/runtime:/var/task/gh2",
+        "shouldPersist": true,
+        "displayOnly": false,
+        "editable": true
+      }
+    ],
     "packageJSON": {
       "dependencies": {
         "googleapis": {
@@ -118,7 +164,7 @@
     "projectRegion": "us-east1",
     "platform": "GCP",
     "platformRegions": {},
-    "lastSave": 1574758387890
+    "lastSave": 1574758574209
   },
   "VCS_STATE": {
     "provider": "GitHub",
